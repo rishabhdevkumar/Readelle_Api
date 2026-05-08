@@ -5,9 +5,9 @@ const {
 
 const createBookService = async (data) => {
     try {
-        const book = await createBookRepository(data);
+        const newBook = await createBookRepository(data);
 
-        return book;
+        return newBook;
 
     } catch (error) {
         throw error;

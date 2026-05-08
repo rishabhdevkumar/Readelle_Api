@@ -10,9 +10,7 @@ const createBook = async (req, res) => {
         res.status(201).json({
             success: true,
             message: "Book created successfully",
-            data: {
-                book: newBook,
-            },
+            data: newBook,
             error: {},
         });
 
@@ -33,14 +31,12 @@ const getAllBooks = async (req, res) => {
         res.status(200).json({
             success: true,
             message: "Books fetched successfully",
-            data: {
-                books,
-                pagination: {
-                    total: books.length,
-                    page: 1,
-                    limit: 10,
-                    totalPages: Math.ceil(books.length / 10),
-                },
+            data: books,
+            pagination: {
+                total: books.length,
+                page: 1,
+                limit: 10,
+                totalPages: Math.ceil(books.length / 10),
             },
             error: {},
         });
