@@ -7,46 +7,67 @@ const createBook = async (req, res) => {
     try {
         const newBook = await createBookService(req.body);
 
-        res.status(201).json({
+        return res.status(201).json({
             success: true,
             message: "Book created successfully",
             data: newBook,
-            error: {},
+            error: null,
         });
 
     } catch (error) {
-        res.status(error.statusCode || 500).json({
+        if (error.name === "ValidationError") {
+            return res.status(400).json({
+                success: false,
+                message: error.message,
+                data: null,
+                error: error.errors,
+            });
+        }
+
+        if (error.code === 11000) {
+            return res.status(409).json({
+                success: false,
+                message: "A book with this title already exists",
+                data: null,
+                error: error.keyValue,
+            });
+        }
+
+        return res.status(500).json({
             success: false,
-            message: error.message,
-            data: {},
-            error: {},
+            message: "Internal Server Error",
+            data: null,
+            error: error.message,
         });
     }
 };
 
 const getAllBooks = async (req, res) => {
     try {
-        const books = await getAllBooksService();
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
 
-        res.status(200).json({
+        const { books, total } = await getAllBooksService(page, limit);
+
+        return res.status(200).json({
             success: true,
             message: "Books fetched successfully",
             data: books,
             pagination: {
-                total: books.length,
-                page: 1,
-                limit: 10,
-                totalPages: Math.ceil(books.length / 10),
+                total,
+                page,
+                limit,
+                totalPages: Math.ceil(total / limit),
             },
-            error: {},
+            error: null,
         });
 
     } catch (error) {
-        res.status(error.statusCode || 500).json({
+        return res.status(500).json({
             success: false,
-            message: error.message,
-            data: {},
-            error: {},
+            message: "Internal Server Error",
+            data: null,
+            error: error.message,
         });
     }
 };
@@ -55,5 +76,3 @@ module.exports = {
     createBook,
     getAllBooks,
 };
-
-// controller api
