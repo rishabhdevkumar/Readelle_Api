@@ -18,10 +18,6 @@ exports.registerUser=async(data)=>{
    
 };
 
-exports.findUserByEmail=async(email)=>{  
-        return await userRepository.findUserByEmail(email);
-}
-
 exports.loginUser = async(data)=>{
     
         const {email,password} = data;

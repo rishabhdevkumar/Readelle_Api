@@ -41,13 +41,11 @@ exports.loginUser = async(req,res)=>{
             success:true,
             message:"Login successfully",
             data:{
-                token:data.token
-            },
-            "user":{
                 "id":data.user._id,
                 "name":data.user.name,
                 "email":data.user.email,
-                "role":data.user.role
+                "role":data.user.role,
+                token:data.token,
             },
 
 
