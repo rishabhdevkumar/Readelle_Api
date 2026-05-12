@@ -1,7 +1,7 @@
 const express = require('express');
 const serverConfig = require('./config/server.config');
 const connectDB = require('./config/db.config');
-
+const userRouter = require("./routes/user.routes");
 const app = express();
 
 app.use(express.json());
@@ -11,9 +11,7 @@ app.get('/ping', (req, res) => {
 });
 
 
-const userRouter = require("./routes/user.routes");
 app.use("/api/users",userRouter);
-
 
 
 app.listen(serverConfig.PORT, async () => {
