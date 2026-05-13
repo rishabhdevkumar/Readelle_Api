@@ -15,7 +15,29 @@ const getAllBooksRepository = async (page, limit) => {
     return { books, total };
 };
 
+const getBookByIdRepository = async (bookId) => {
+    return await Book.findById(bookId);
+};
+
+const updateBookRepository = async (bookId, data) => {
+    return await Book.findByIdAndUpdate(
+        bookId,
+        data,
+        {
+            returnDocument: "after",
+            runValidators: true,
+        }
+    );
+};
+
+const deleteBookRepository = async (bookId) => {
+    return await Book.findByIdAndDelete(bookId);
+};
+
 module.exports = {
     createBookRepository,
     getAllBooksRepository,
+    getBookByIdRepository,
+    updateBookRepository,
+    deleteBookRepository,
 };

@@ -4,7 +4,7 @@ const generateCustomId = require("../utils/idGenerator"); // Import the custom I
 const userSchema = new mongoose.Schema(
     {
         _id: {
-            type: String, // Explicit human-readable ID
+            type: String, 
         },
         name: {
             type: String,
