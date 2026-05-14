@@ -1,6 +1,9 @@
 const {
     createBookRepository,
     getAllBooksRepository,
+    getBookByIdRepository,
+    updateBookRepository,
+    deleteBookRepository,
 } = require("../repositories/book.repository");
 
 const createBookService = async (data) => {
@@ -11,7 +14,22 @@ const getAllBooksService = async (page, limit) => {
     return await getAllBooksRepository(page, limit);
 };
 
+const getBookByIdService = async (bookId) => {
+    return await getBookByIdRepository(bookId);
+};
+
+const updateBookService = async (bookId, data) => {
+    return await updateBookRepository(bookId, data);
+};
+
+const deleteBookService = async (bookId) => {
+    return await deleteBookRepository(bookId);
+};
+
 module.exports = {
     createBookService,
     getAllBooksService,
+    getBookByIdService,
+    updateBookService,
+    deleteBookService,
 };

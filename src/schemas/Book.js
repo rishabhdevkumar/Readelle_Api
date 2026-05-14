@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const generateCustomId = require("../utils/idGenerator"); // Import the custom ID generator utility
+const generateCustomId = require("../utils/idGenerator");
 
 const bookSchema = new mongoose.Schema(
     {
         _id: {
-            type: String, // Explicit human-readable ID
+            type: String,
         },
         title: {
             type: String,
@@ -51,8 +51,7 @@ const bookSchema = new mongoose.Schema(
 bookSchema.pre("save", async function () {
     if (this.isNew) {
         const langCode = this.language ? this.language.substring(0, 2) : "XX";
-        
-        // Replaces your old findOneAndUpdate block entirely
+
         this._id = await generateCustomId("book_sequence_id", "BK", langCode, 3);
     }
 });
