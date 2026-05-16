@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const generateCustomId = require("../utils/idGenerator"); // Import the custom ID generator utility
+const generateCustomId = require("../utils/idGenerator"); 
 
 const userSchema = new mongoose.Schema(
     {
@@ -52,7 +52,6 @@ userSchema.pre("save", async function () {
         if (this.role === "seller") roleCode = "SL";
         if (this.role === "admin") roleCode = "AD";
 
-        // Replaces your old findOneAndUpdate block entirely
         this._id = await generateCustomId("user_sequence_id", "USR", roleCode, 3);
     }
 });

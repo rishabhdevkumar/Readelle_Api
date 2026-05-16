@@ -20,7 +20,7 @@ exports.registerUser=async(data)=>{
 
 exports.loginUser = async(data)=>{
     
-        const {email,password} = data;// reveals hidden chars
+        const {email,password} = data;
 
         if(!email || !password){
            throw new Error("email and password required");
