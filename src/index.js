@@ -3,8 +3,7 @@ const serverConfig = require('./config/server.config');
 const connectDB = require('./config/db.config');
 const bookRoutes = require("./routes/book.routes");
 const userRouter = require("./routes/user.routes");
-const categoryRouter = require("./routes/categories.routes");
-const cors = require('cors');
+const categoryRouter = require("./routes/category.routes");
 
 const app = express();
 
@@ -17,7 +16,7 @@ app.use(cors({
 app.use(express.json());
 
 app.use("/api/users",userRouter);
-app.use("/api/categories", categoryRouter);
+app.use("/api/category", categoryRouter);
 app.use("/api/books", bookRoutes);
 
 
