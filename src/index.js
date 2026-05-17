@@ -4,6 +4,7 @@ const connectDB = require('./config/db.config');
 const bookRoutes = require("./routes/book.routes");
 const userRouter = require("./routes/user.routes");
 const categoryRouter = require("./routes/category.routes");
+const cors = require('cors');
 
 const app = express();
 
