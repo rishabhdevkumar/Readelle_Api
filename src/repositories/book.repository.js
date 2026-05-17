@@ -20,7 +20,7 @@ const getAllBooksRepository = async (page, limit) => {
 
 const getBookByIdRepository = async (bookId) => {
     return await Book.findById(bookId)
-        .populate("category_id");
+        .populate("category");
 };
 
 const updateBookRepository = async (bookId, data) => {
@@ -36,7 +36,7 @@ const updateBookRepository = async (bookId, data) => {
 
 const deleteBookRepository = async (bookId) => {
     return await Book.findByIdAndDelete(bookId)
-        .populate("category_id");
+        .populate("category");
 };
 
 module.exports = {

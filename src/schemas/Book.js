@@ -6,7 +6,7 @@ const bookSchema = new mongoose.Schema(
         _id: {
             type: String,
         },
-        category_id: {
+        category: {
             type: String,
             ref: "Category",
             required: [true, "Category is required"],

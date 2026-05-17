@@ -17,7 +17,7 @@ app.use(cors({
 app.use(express.json());
 
 app.use("/api/users",userRouter);
-app.use("/api/category", categoryRouter);
+app.use("/api/categories", categoryRouter);
 app.use("/api/books", bookRoutes);
 
 

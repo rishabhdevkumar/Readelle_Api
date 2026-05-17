@@ -1,4 +1,3 @@
-
 const jwt = require("jsonwebtoken");
 
 exports.auth = (req, res, next) => {
@@ -8,7 +7,9 @@ exports.auth = (req, res, next) => {
         if (!authHeader) {
             return res.status(401).json({
                 success: false,
-                message: "No token provided"
+                message: "No token provided",
+                data: null,
+                error: null,
             });
         }
 
@@ -17,74 +18,82 @@ exports.auth = (req, res, next) => {
         if (!token) {
             return res.status(401).json({
                 success: false,
-                message: "Token format is invalid"
-            })
+                message: "Token format is invalid",
+                data: null,
+                error: null,
+            });
         }
 
-        const decoded = jwt.verify(
-            token,
-            process.env.SECRET_TOKEN
-        )
+        const decoded = jwt.verify(token, process.env.SECRET_TOKEN);
 
         req.user = decoded;
         next();
 
     } catch (error) {
-        res.status(401).json({
+        return res.status(401).json({
             success: false,
-            message: "Invalid and expired token",
-            message: error.message
-        })
+            message: error.message,
+            data: null,
+            error: error,
+        });
     }
-}
-
-
-
+};
 
 exports.authorizeRole = (allowedRole) => {
     return (req, res, next) => {
         try {
             if (!req.user) {
                 return res.status(401).json({
-                    message: "User not authenticated"
+                    success: false,
+                    message: "User not authenticated",
+                    data: null,
+                    error: null,
                 });
             }
 
             if (!allowedRole.includes(req.user.role)) {
-                res.status(403).json({
-                    message: "Access denied"
-                })
+                return res.status(403).json({
+                    success: false,
+                    message: "Access denied. You do not have permission to perform this action",
+                    data: null,
+                    error: null,
+                });
             }
 
             next();
-        } catch (error) {
-            res.status(500).json({
-                message: error.message
-            })
-        }
-    }
-}
 
+        } catch (error) {
+            return res.status(500).json({
+                success: false,
+                message: error.message,
+                data: null,
+                error: error,
+            });
+        }
+    };
+};
 
 exports.validateRegister = (req, res, next) => {
-
     try {
         const { name, email, password, phone } = req.body;
 
         if (!name || !email || !password || !phone) {
-            res.json({
-                message: "All fields are required"
+            return res.status(400).json({
+                success: false,
+                message: "All fields are required",
+                data: null,
+                error: null,
             });
         }
 
         next();
 
     } catch (error) {
-        res.json({
-            message: error.message
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+            data: null,
+            error: error,
         });
     }
-
-
-}
-
+};
