@@ -1,5 +1,5 @@
-const { createCategoryRepository, getAllCategoriesRepository, updateCategoryRepository,
-} = require("../repositories/categories.repository");
+const { createCategoryRepository, getAllCategoriesRepository, updateCategoryRepository, deleteCategoryRepository,
+} = require("../repositories/category.repository");
 
 const createCategoryService = async (data) => {
     return await createCategoryRepository(data);
@@ -13,8 +13,13 @@ const updateCategoryService = async (id, data) => {
     return await updateCategoryRepository(id, data);
 };
 
+const deleteCategoryService = async (categoryId) => {
+    return await deleteCategoryRepository(categoryId);
+};
+
 module.exports = {
     createCategoryService,
     getAllCategoriesService,
     updateCategoryService,
+    deleteCategoryService,
 };
