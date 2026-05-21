@@ -4,7 +4,8 @@ const connectDB = require('./config/db.config');
 const bookRoutes = require("./routes/book.routes");
 const userRouter = require("./routes/user.routes");
 const categoryRouter = require("./routes/category.routes");
-const cors = require('cors');
+const wishlistRoutes = require("./routes/wishlist.routes");
+const cors = require("cors");
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use("/api/users",userRouter);
 app.use("/api/categories", categoryRouter);
 app.use("/api/books", bookRoutes);
+app.use("/api/wishlist", wishlistRoutes);
 
 
 app.get('/ping', (req, res) => {
