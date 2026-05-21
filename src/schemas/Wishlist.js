@@ -1,4 +1,3 @@
-
 const mongoose = require("mongoose");
 const generateCustomId = require("../utils/idGenerator");
 
@@ -10,12 +9,14 @@ const wishlistSchema = new mongoose.Schema(
 
         user_id: {
             type: String,
+            ref: "User",
             required: [true, "User id is required"],
             trim: true,
         },
 
         book_id: {
             type: String,
+            ref: "Book",
             required: [true, "Book id is required"],
             trim: true,
         },
@@ -23,10 +24,12 @@ const wishlistSchema = new mongoose.Schema(
         status: {
             type: String,
             enum: {
-                values: ["to read", "Reading", "Complete"],
-                message: "Status must be to read, Reading or Complete",
+                values: ["TO_READ", "READING", "COMPLETE"],
+                message: "Status must be TO_READ, READING or COMPLETE",
             },
-            default: "to read",
+            default: "TO_READ",
+            uppercase: true,
+            trim: true,
         },
     },
     {
@@ -39,7 +42,6 @@ const wishlistSchema = new mongoose.Schema(
 
 wishlistSchema.pre("save", async function () {
     if (this.isNew) {
-
         this._id = await generateCustomId(
             "wishlist_sequence_id",
             "WIS",
