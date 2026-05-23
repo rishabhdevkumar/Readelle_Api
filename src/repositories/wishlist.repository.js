@@ -1,6 +1,7 @@
+
 const Wishlist = require("../schemas/Wishlist");
 
-const createWishlistRepository = async (data) => {
+const toggleWishlistRepository = async (data) => {
     return await Wishlist.create(data);
 };
 
@@ -11,19 +12,31 @@ const findWishlistRepository = async (userId, bookId) => {
     });
 };
 
-const deleteWishlistRepository = async (wishlistId) => {
-    return await Wishlist.findByIdAndDelete(wishlistId);
-};
-
 const getAllWishlistRepository = async (userId) => {
     return await Wishlist.find({
         user_id: userId,
     }).populate("book_id");
 };
 
+const updateWishlistRepository = async (wishlistId, data) => {
+    return await Wishlist.findByIdAndUpdate(
+        wishlistId,
+        data,
+        {
+            returnDocument: "after",
+            runValidators: true,
+        }
+    );
+};
+
+const deleteWishlistRepository = async (wishlistId) => {
+    return await Wishlist.findByIdAndDelete(wishlistId);
+};
+
 module.exports = {
-    createWishlistRepository,
+    toggleWishlistRepository,
     findWishlistRepository,
     deleteWishlistRepository,
     getAllWishlistRepository,
+    updateWishlistRepository,
 };

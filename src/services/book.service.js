@@ -4,6 +4,7 @@ const {
     getBookByIdRepository,
     updateBookRepository,
     deleteBookRepository,
+    findBookByIdRepository
 } = require("../repositories/book.repository");
 
 const createBookService = async (data) => {
@@ -27,9 +28,10 @@ const deleteBookService = async (bookId) => {
 };
 
 module.exports = {
-    createBookService,
-    getAllBooksService,
-    getBookByIdService,
-    updateBookService,
-    deleteBookService,
+    createBookRepository,
+    getAllBooksRepository,
+    getBookByIdRepository,
+    updateBookRepository,
+    deleteBookRepository,
+    findBookByIdRepository,
 };
