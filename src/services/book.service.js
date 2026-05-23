@@ -4,6 +4,7 @@ const {
     getBookByIdRepository,
     updateBookRepository,
     deleteBookRepository,
+    findBookByIdRepository
 } = require("../repositories/book.repository");
 const uploadToCloudinary = require("../utils/uploadToCloudinary");
 const deleteFromCloudinary = require("../utils/deleteFromCloudinary");
@@ -95,9 +96,10 @@ const deleteBookService = async (bookId) => {
 };
 
 module.exports = {
-    createBookService,
-    getAllBooksService,
-    getBookByIdService,
-    updateBookService,
-    deleteBookService,
+    createBookRepository,
+    getAllBooksRepository,
+    getBookByIdRepository,
+    updateBookRepository,
+    deleteBookRepository,
+    findBookByIdRepository,
 };

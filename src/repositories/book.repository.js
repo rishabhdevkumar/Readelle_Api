@@ -39,10 +39,15 @@ const deleteBookRepository = async (bookId) => {
         .populate("category");
 };
 
+const findBookByIdRepository = async (bookId) => {
+    return await Book.findOne({ _id: bookId });
+};
+
 module.exports = {
     createBookRepository,
     getAllBooksRepository,
     getBookByIdRepository,
     updateBookRepository,
     deleteBookRepository,
+    findBookByIdRepository
 };
