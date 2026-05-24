@@ -25,7 +25,7 @@ exports.updateQuantity = async(cartItemId,quantity)=>{
     return await CartItem.findByIdAndUpdate(
         cartItemId,
         {quantity},
-        {new:true}
+        {returnDocument: "after", runValidators: true}
     );
 };
 
