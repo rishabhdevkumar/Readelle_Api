@@ -9,6 +9,7 @@ const chapterRouter = require("./routes/chapter.router");
 const cors = require("cors");
 const cartRouter = require("./routes/cart.routes");
 const notesRouter = require("./routes/notes.routes");
+const highlightRouter = require("./routes/highlight.routes");
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/cart",cartRouter);
 app.use("/api/chapters", chapterRouter);
 app.use("/api/notes", notesRouter);
+app.use("/api/highlights", highlightRouter);
 
 
 app.get('/ping', (req, res) => {
